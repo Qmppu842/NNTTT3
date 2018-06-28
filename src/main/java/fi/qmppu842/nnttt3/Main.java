@@ -14,6 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+//    TODO: add real code
     @Override
     public void start(Stage primaryStage) {
         Button btn = new Button();
