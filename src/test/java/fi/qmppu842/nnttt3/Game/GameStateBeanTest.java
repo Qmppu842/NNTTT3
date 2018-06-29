@@ -1,6 +1,5 @@
-package Game;
+package fi.qmppu842.nnttt3.Game;
 
-import lombok.val;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -9,11 +8,11 @@ import org.junit.Before;
  *
  * @author Qmppu842
  */
-public class GameStateBean {
+public class GameStateBeanTest {
 
     private GameStateBean gameState;
 
-    public GameStateBean() {
+    public GameStateBeanTest() {
         gameState = new GameStateBean();
     }
 
@@ -38,7 +37,6 @@ public class GameStateBean {
 
     @Test
     public void makeMoveTest() {
-//        gameState.setUpNewGame();
         int x = 0;
         int y = 0;
         gameState.makeMove(x, y);
@@ -48,16 +46,12 @@ public class GameStateBean {
 
     @Test
     public void noTurnsChangedTest() {
-//        gameState.setUpNewGame();
         int next = gameState.getNext();
         assertEquals("Seuraavaksi vuorossa pitäisi olla 1 mutta oli " + next, 1, next);
-
     }
 
     @Test
     public void makeTurnChangeTest() {
-//        gameState.setUpNewGame();
-
         int x = 0;
         int y = 0;
         gameState.makeMove(x, y);
@@ -67,8 +61,6 @@ public class GameStateBean {
 
     @Test
     public void makeTwoTurnChangesTest() {
-//        gameState.setUpNewGame();
-
         int x = 0;
         int y = 0;
         gameState.makeMove(x, y);
@@ -82,7 +74,6 @@ public class GameStateBean {
 
     @Test
     public void makeTurnOnSameSquareTest() {
-//       gameState.setUpNewGame();
 
         int x = 0;
         int y = 0;
@@ -150,27 +141,4 @@ public class GameStateBean {
         return sum;
     }
 
-    private void setUpNewGame() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private int[][] getBoard() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private void makeMove(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private int getNext() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private int getXSize() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private int getYSize() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
