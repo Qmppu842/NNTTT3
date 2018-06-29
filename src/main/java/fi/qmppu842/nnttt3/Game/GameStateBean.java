@@ -2,6 +2,7 @@ package fi.qmppu842.nnttt3.Game;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.Arrays;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +34,9 @@ public class GameStateBean {
     }
 
     public void setUpNewGame() {
+        System.out.println("Setup");
         board = new int[3][3];
+        System.out.println(Arrays.deepToString(board));
         next = 1;
     }
 
