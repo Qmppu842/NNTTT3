@@ -7,9 +7,8 @@ import lombok.val;
 //import static org.junit.Assert.*;
 //import org.junit.Before;
 import org.testng.annotations.Test;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-import org.testng.annotations.BeforeTest;
+import static org.testng.Assert.*;
+import org.testng.annotations.*;
 
 /**
  *
@@ -23,14 +22,15 @@ public class GameStateBeanTest {
         gameState = new GameStateBean();
     }
 
-    @BeforeTest
+    @BeforeMethod
     public void setUp() {
         gameState.setUpNewGame();
     }
 
-    @Test(priority = 0)
+    @Test
     public void setUpTest() {
 //       gameState.setUpNewGame();
+//        gameState.setUpNewGame();
         int[][] board = gameState.getBoard();
         int sum = boardSum(board);
 //        for (int x = 0; x < board.length; x++) {
@@ -43,15 +43,15 @@ public class GameStateBeanTest {
 
     }
 
-//    @Test
-//    public void makeMoveTest() {
-//        int x = 0;
-//        int y = 0;
-//        gameState.makeMove(x, y);
-//        int[][] board = gameState.getBoard();
-////        assertEquals("Move ei tapahtunut!", 1, board[x][y]);
-//        assertEquals(board[x][y], 1);
-//    }
+    @Test
+    public void makeMoveTest() {
+        int x = 0;
+        int y = 0;
+        gameState.makeMove(x, y);
+        int[][] board = gameState.getBoard();
+//        assertEquals("Move ei tapahtunut!", 1, board[x][y]);
+        assertEquals(board[x][y], 1);
+    }
     @Test
     public void noTurnsChangedTest() {
         int next = gameState.getNext();
@@ -112,6 +112,7 @@ public class GameStateBeanTest {
         assertEquals(sum, 1);
 
     }
+
     @Test
     public void addPropertyChangeListenerTest() {
         PropertyChangeListener listener = new PropertyChangeListener() {
@@ -180,14 +181,14 @@ public class GameStateBeanTest {
     }
 
     private int boardSum(int[][] board) {
-        System.out.println("Board sum incoming:");
+//        System.out.println("Board sum incoming:");
         int sum = 0;
         for (int x = 0; x < board.length; x++) {
             for (int y = 0; y < board[x].length; y++) {
                 sum += board[x][y];
-                System.out.print(board[x][y]);
+//                System.out.print(board[x][y]);
             }
-            System.out.println();
+//            System.out.println();
         }
         return sum;
     }

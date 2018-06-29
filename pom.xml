@@ -124,9 +124,9 @@
                     <execution>
                         <id>unpack-dependencies</id>
                         <phase>package</phase>
-                        <goals>
+<!--                        <goals>
                             <goal>unpack-dependencies</goal>
-                        </goals>
+                        </goals>-->
                         <configuration>
                             <excludeScope>system</excludeScope>
                             <excludeGroupIds>junit,org.mockito,org.hamcrest</excludeGroupIds>
