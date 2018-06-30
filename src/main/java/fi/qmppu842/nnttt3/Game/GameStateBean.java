@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -44,13 +45,13 @@ public class GameStateBean {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void makeMove(int x, int y) {
-        int oldBoard = board[x][y];
+    public void makeMove(int y, int x) {
+        int oldBoard = board[y][x];
         if (oldBoard == 0) {
-            board[x][y] = next;
+            board[y][x] = next;
             next *= -1;
         }
-        propChange.firePropertyChange("makeMove", oldBoard, board[x][y]);
+        propChange.firePropertyChange("makeMove", oldBoard, board[y][x]);
 
     }
 

@@ -2,6 +2,7 @@ package fi.qmppu842.nnttt3.Game;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Arrays;
 import lombok.val;
 //import org.junit.Test;
 //import static org.junit.Assert.*;
@@ -52,6 +53,7 @@ public class GameStateBeanTest {
 //        assertEquals("Move ei tapahtunut!", 1, board[x][y]);
         assertEquals(board[x][y], 1);
     }
+
     @Test
     public void noTurnsChangedTest() {
         int next = gameState.getNext();
@@ -148,21 +150,39 @@ public class GameStateBeanTest {
         assertTrue(true);
     }
 
-    private void makeOneMove(int x, int y) {
-        gameState.makeMove(x, y);
+    @Test
+    public void didRowWinTest() {
+//        makeOneMove(0, 0);
+//        makeOneMove(0, 1);
+//        makeOneMove(1, 0);
+//        makeOneMove(1, 1);
+//        makeOneMove(2, 0);
+        for (int i = 0; i < 3; i++) {
+            makeOneMove(0, i);
+            if (i < 2) {
+                makeOneMove(1, i);
+            }
+        }
+
+//        boardToString(gameState.getBoard());  
+//        boardSum(gameState.getBoard());
+    }
+
+    private void makeOneMove(int y, int x) {
+        gameState.makeMove(y, x);
     }
 
     private void fillRow(int x) {
         int howMany = gameState.getYSize();
         for (int i = 0; i < howMany; i++) {
-            makeOneMove(x, i);
+            makeOneMove(i, x);
         }
     }
 
     private void fillColumn(int y) {
         int howMany = gameState.getXSize();
         for (int i = 0; i < howMany; i++) {
-            makeOneMove(i, y);
+            makeOneMove(y, i);
         }
     }
 
@@ -176,21 +196,33 @@ public class GameStateBeanTest {
     private void makeManyMovesInColumn(int y, int howMany) {
         howMany = Math.min(gameState.getYSize(), howMany);
         for (int i = 0; i < howMany; i++) {
-            makeOneMove(i, y);
+            makeOneMove(y, i);
         }
     }
 
     private int boardSum(int[][] board) {
 //        System.out.println("Board sum incoming:");
         int sum = 0;
-        for (int x = 0; x < board.length; x++) {
-            for (int y = 0; y < board[x].length; y++) {
+        for (int y = 0; y < board.length; y++) {
+            for (int x = 0; x < board[y].length; x++) {
                 sum += board[x][y];
 //                System.out.print(board[x][y]);
             }
 //            System.out.println();
         }
         return sum;
+    }
+
+    private void boardToString(int[][] board) {
+        System.out.println("BoardToString starts here:");
+        for (int y = 0; y < board.length; y++) {
+            for (int x = 0; x < board[y].length; x++) {
+                System.out.print(board[x][y]);
+//                System.out.print(y);
+            }
+            System.out.println();
+        }
+
     }
 
 }
