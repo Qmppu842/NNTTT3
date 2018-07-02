@@ -1,8 +1,13 @@
 package fi.qmppu842.nnttt3.Game;
 
+import com.sun.tracing.dtrace.ArgsAttributes;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lombok.val;
 //import org.junit.Test;
 //import static org.junit.Assert.*;
@@ -103,10 +108,10 @@ public class GameStateBeanTest {
         int xSize = gameState.getXSize();
         int ySize = gameState.getYSize();
 
-        fillRow(0);
-        fillRow(2);
-        fillRow(1);
-
+//        fillRow(0);
+//        fillRow(2);
+//        fillRow(1);
+        fillTie();
         int[][] board = gameState.getBoard();
         int sum = boardSum(board);
 
@@ -120,11 +125,11 @@ public class GameStateBeanTest {
         PropertyChangeListener listener = new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent pce) {
-                System.out.println("Just a Test.");
+//                System.out.println("Just a Test.");
             }
         };
         gameState.addPropertyChangeListener(listener);
-        val change = gameState.getPropChange();
+        PropertyChangeSupport change = gameState.getPropChange();
 //        assertTrue("PropertyChangeListener not added properly", change != null);
         assertTrue(change != null);
 
@@ -142,7 +147,7 @@ public class GameStateBeanTest {
 //        gameState.addPropertyChangeListener( listener);
 //        gameState.removePropertyChangeListener(listener);
 //        PropertyChangeListener[] change = gameState.getPropChange().getPropertyChangeListeners();
-//        assertTrue("PropertyChangeListener not added properly", change == null);
+////        assertTrue("PropertyChangeListener not added properly", change == null);
 //        System.out.println(change1);
 //        System.out.println(change);
 //        assertTrue(change.length == 0);
@@ -150,22 +155,92 @@ public class GameStateBeanTest {
         assertTrue(true);
     }
 
-    @Test
-    public void didRowWinTest() {
-//        makeOneMove(0, 0);
-//        makeOneMove(0, 1);
-//        makeOneMove(1, 0);
-//        makeOneMove(1, 1);
-//        makeOneMove(2, 0);
-        for (int i = 0; i < 3; i++) {
-            makeOneMove(0, i);
-            if (i < 2) {
-                makeOneMove(1, i);
-            }
-        }
-
-//        boardToString(gameState.getBoard());  
+//    @Test
+//    public void didRowWinTest() {
+////        makeOneMove(0, 0);
+////        makeOneMove(0, 1);
+////        makeOneMove(1, 0);
+////        makeOneMove(1, 1);
+////        makeOneMove(2, 0);
+//        for (int i = 0; i < 3; i++) {
+//            makeOneMove(0, i);
+//            if (i < 2) {
+//                makeOneMove(1, i);
+//            }
+//        }
+//
+//        boardToString(gameState.getBoard(), "didRowWinTest");
 //        boardSum(gameState.getBoard());
+//
+//    }
+    @Test
+    public void boardSumTest() {
+//        int alku = gameState.getBoardSum();
+        assertTrue(gameState.getBoardSum() == 0);
+        makeOneMove(0, 0);
+        assertTrue(gameState.getBoardSum() == 1);
+        makeOneMove(0, 1);
+        assertTrue(gameState.getBoardSum() == 0);
+        gameState.setUpNewGame();
+        fillTie();
+        assertTrue(gameState.getBoardSum() == 1);
+
+    }
+
+//    @Test
+//    public void WinTest() {
+////        for (int i = 0; i < 3; i++) {
+////            makeOneMove(0, i);
+////            if (i < 2) {
+////                makeOneMove(1, i);
+////            }
+////        }
+//        playXVictory();
+//        assertTrue(gameState.getWinner() == 1);
+//    }
+
+    @Test
+    public void horizontalWinTest() {
+//        TODO: Reflection API seems dang cool.
+//        Class gState = gameState.getClass();
+//        try {
+//            Method checkHorWinner = gState.getDeclaredMethod("checkHorWinner", null);
+//            checkHorWinner.setAccessible(true);
+            gameState.setBoard(new int[][]{{1, 1, 1}, {0, 0, 0}, {0, 0, 0}});
+            assertTrue(gameState.checkHorWinner() == 1);
+//            assertTrue(checkHorWinner.invoke(this,) == 1);
+            gameState.setBoard(new int[][]{{0, 0, 0}, {1, 1, 1}, {0, 0, 0}});
+            assertTrue(gameState.checkHorWinner() == 1);
+            gameState.setBoard(new int[][]{{0, 0, 0}, {0, 0, 0}, {1, 1, 1}});
+            assertTrue(gameState.checkHorWinner() == 1);
+//        } catch (NoSuchMethodException ex) {
+//            Logger.getLogger(GameStateBeanTest.class.getName()).log(Level.SEVERE, null, ex);
+//        } catch (SecurityException ex) {
+//            Logger.getLogger(GameStateBeanTest.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+    }
+
+    @Test
+    public void verticalWinTest() {
+        gameState.setBoard(new int[][]{{1, 0, 0}, {1, 0, 0}, {1, 0, 0}});
+        assertTrue(gameState.checkVerWinner() == 1);
+        gameState.setBoard(new int[][]{{0, 1, 0}, {0, 1, 0}, {0, 1, 0}});
+        assertTrue(gameState.checkVerWinner() == 1);
+        gameState.setBoard(new int[][]{{0, 0, 1}, {0, 0, 1}, {0, 0, 1}});
+        assertTrue(gameState.checkVerWinner() == 1);
+
+    }
+
+    @Test
+    public void diagonalWinTest() {
+        gameState.setBoard(new int[][]{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}});
+        assertTrue(gameState.checkDiagWinner() == 3);
+        gameState.setBoard(new int[][]{{0, 0, 1}, {0, 1, 0}, {1, 0, 0}});
+        assertTrue(gameState.checkDiagWinner() == 3);
+        gameState.setBoard(new int[][]{{-1, 0, 0}, {0, -1, 0}, {0, 0, -1}});
+        assertTrue(gameState.checkDiagWinner() == -3);
+        gameState.setBoard(new int[][]{{0, 0, -1}, {0, -1, 0}, {-1, 0, 0}});
+        assertTrue(gameState.checkDiagWinner() == -3);
     }
 
     private void makeOneMove(int y, int x) {
@@ -183,6 +258,21 @@ public class GameStateBeanTest {
         int howMany = gameState.getXSize();
         for (int i = 0; i < howMany; i++) {
             makeOneMove(y, i);
+        }
+    }
+
+    private void fillTie() {
+        fillRow(0);
+        fillRow(2);
+        fillRow(1);
+    }
+
+    private void playXVictory() {
+        for (int i = 0; i < 3; i++) {
+            makeOneMove(0, i);
+            if (i < 2) {
+                makeOneMove(1, i);
+            }
         }
     }
 
@@ -213,15 +303,17 @@ public class GameStateBeanTest {
         return sum;
     }
 
-    private void boardToString(int[][] board) {
+    private void boardToString(int[][] board, String kukaTulostaa) {
+        System.out.println("Nyt tulostus vuorossa on: " + kukaTulostaa);
         System.out.println("BoardToString starts here:");
-        for (int y = 0; y < board.length; y++) {
-            for (int x = 0; x < board[y].length; x++) {
-                System.out.print(board[x][y]);
-//                System.out.print(y);
-            }
-            System.out.println();
-        }
+//        for (int y = 0; y < board.length; y++) {
+//            for (int x = 0; x < board[y].length; x++) {
+//                System.out.print(board[x][y]);
+////                System.out.print(y);
+//            }
+//            System.out.println();
+//        }
+        System.out.println(Arrays.deepToString(board));
 
     }
 
