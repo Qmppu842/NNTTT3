@@ -46,7 +46,7 @@
     
     <reporting>
         <plugins>
-            <plugin>
+<!--            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.0.0</version>
@@ -57,7 +57,7 @@
                         </reports>
                     </reportSet>
                 </reportSets>
-            </plugin>
+            </plugin>-->
             
             <plugin>
                 <groupId>org.pitest</groupId>
@@ -72,6 +72,12 @@
                     <siteReportName>my-pit-report-name</siteReportName>
                     <siteReportDescription>my pit report custom description</siteReportDescription>
                     <siteReportDirectory>pit-custom-site-directory</siteReportDirectory>
+                    <targetClasses>
+                        <param>fi.qmppu842.nnttt3.*</param>
+                    </targetClasses>
+                    <targetTests>
+                         <param>fi.qmppu842.nnttt3.*</param>
+                    </targetTests>
                 </configuration>
                 <reportSets>
                     <reportSet>
