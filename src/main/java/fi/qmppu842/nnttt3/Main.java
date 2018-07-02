@@ -10,12 +10,11 @@ package fi.qmppu842.nnttt3;
 //import javafx.scene.control.Button;
 //import javafx.scene.layout.StackPane;
 //import javafx.stage.Stage;
-
 /**
  *
  * @author Qmppu842
  */
-public class Main{// extends Application {
+public class Main {// extends Application {
 
 //    TODO: add real code
 //    @Override
@@ -39,13 +38,22 @@ public class Main{// extends Application {
 //        primaryStage.setScene(scene);
 //        primaryStage.show();
 //    }
-
 //    public static int testee = 0;
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+//int[][] a = {
+//{1, 0, 12, -1},
+//{7, -3, 2, 5},
+//{-5, -2, 2, -9}
+//};
+//System.out.println("1,1: ");
+//System.out.println(a[1][1]);
+//System.out.println("1,0: ");
+//System.out.println(a[1][0]);
+//System.out.println("0,1: ");
+//System.out.println(a[0][1]);
 //        System.out.println("Main was running here.");
 //        launch(args);
 
@@ -61,8 +69,5 @@ public class Main{// extends Application {
 //        board.setBoard(3, 3);
 //        board.setBoard(3, 4);
     }
-
-
-    
 
 }

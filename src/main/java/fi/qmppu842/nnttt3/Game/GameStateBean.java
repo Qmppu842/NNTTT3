@@ -111,10 +111,18 @@ public class GameStateBean {
     public int checkHorWinner() {
         int sum = 0;
         for (int y = 0; y < board.length; y++) {
-            sum = (Math.abs(sum) >= 3 ? sum : 0);
+//            sum = (Math.abs(sum) >= 3 ? sum : 0);
             for (int x = 0; x < board[y].length; x++) {
-                sum += board[x][y];
+                sum += board[y][x];
+//                System.out.println("board[x]:");
+//                System.out.println(Arrays.toString(board[x]));
+//                System.out.println("board[x][y]:");
+//                System.out.println(board[y][x]);
             }
+             if (sum >= 3) {
+                return sum;
+            }
+             sum = 0;
         }
 //        if (turnCounter < 9) {
 //            sum = 2;
@@ -129,8 +137,12 @@ public class GameStateBean {
         int sum = 0;
         for (int x = 0; x < board.length; x++) {
             sum = (Math.abs(sum) >= 3 ? sum : 0);
+            
             for (int y = 0; y < board[x].length; y++) {
-                sum += board[x][y];
+                sum += board[y][x];
+            }
+            if (sum >= 3) {
+                return sum;
             }
         }
 //        if (turnCounter < 9) {

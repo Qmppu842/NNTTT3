@@ -155,27 +155,9 @@ public class GameStateBeanTest {
         assertTrue(true);
     }
 
-//    @Test
-//    public void didRowWinTest() {
-////        makeOneMove(0, 0);
-////        makeOneMove(0, 1);
-////        makeOneMove(1, 0);
-////        makeOneMove(1, 1);
-////        makeOneMove(2, 0);
-//        for (int i = 0; i < 3; i++) {
-//            makeOneMove(0, i);
-//            if (i < 2) {
-//                makeOneMove(1, i);
-//            }
-//        }
-//
-//        boardToString(gameState.getBoard(), "didRowWinTest");
-//        boardSum(gameState.getBoard());
-//
-//    }
+
     @Test
     public void boardSumTest() {
-//        int alku = gameState.getBoardSum();
         assertTrue(gameState.getBoardSum() == 0);
         makeOneMove(0, 0);
         assertTrue(gameState.getBoardSum() == 1);
@@ -187,47 +169,25 @@ public class GameStateBeanTest {
 
     }
 
-//    @Test
-//    public void WinTest() {
-////        for (int i = 0; i < 3; i++) {
-////            makeOneMove(0, i);
-////            if (i < 2) {
-////                makeOneMove(1, i);
-////            }
-////        }
-//        playXVictory();
-//        assertTrue(gameState.getWinner() == 1);
-//    }
-
     @Test
     public void horizontalWinTest() {
 //        TODO: Reflection API seems dang cool.
-//        Class gState = gameState.getClass();
-//        try {
-//            Method checkHorWinner = gState.getDeclaredMethod("checkHorWinner", null);
-//            checkHorWinner.setAccessible(true);
             gameState.setBoard(new int[][]{{1, 1, 1}, {0, 0, 0}, {0, 0, 0}});
-            assertTrue(gameState.checkHorWinner() == 1);
-//            assertTrue(checkHorWinner.invoke(this,) == 1);
+            assertTrue(gameState.checkHorWinner() == 3);
             gameState.setBoard(new int[][]{{0, 0, 0}, {1, 1, 1}, {0, 0, 0}});
-            assertTrue(gameState.checkHorWinner() == 1);
+            assertTrue(gameState.checkHorWinner() == 3);
             gameState.setBoard(new int[][]{{0, 0, 0}, {0, 0, 0}, {1, 1, 1}});
-            assertTrue(gameState.checkHorWinner() == 1);
-//        } catch (NoSuchMethodException ex) {
-//            Logger.getLogger(GameStateBeanTest.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (SecurityException ex) {
-//            Logger.getLogger(GameStateBeanTest.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+            assertTrue(gameState.checkHorWinner() == 3);
     }
 
     @Test
     public void verticalWinTest() {
         gameState.setBoard(new int[][]{{1, 0, 0}, {1, 0, 0}, {1, 0, 0}});
-        assertTrue(gameState.checkVerWinner() == 1);
+        assertTrue(gameState.checkVerWinner() == 3);
         gameState.setBoard(new int[][]{{0, 1, 0}, {0, 1, 0}, {0, 1, 0}});
-        assertTrue(gameState.checkVerWinner() == 1);
+        assertTrue(gameState.checkVerWinner() == 3);
         gameState.setBoard(new int[][]{{0, 0, 1}, {0, 0, 1}, {0, 0, 1}});
-        assertTrue(gameState.checkVerWinner() == 1);
+        assertTrue(gameState.checkVerWinner() == 3);
 
     }
 
