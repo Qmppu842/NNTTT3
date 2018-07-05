@@ -1,9 +1,11 @@
 package fi.qmppu842.nnttt3.Game;
 
+import java.awt.Point;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
@@ -15,6 +17,7 @@ public class GameStateBean {
     @Getter
     private int[][] board;
     @Getter
+    @Setter
     private int next;
     private PropertyChangeSupport propChange;
 //    TODO: delombok things to get proper javadoc
@@ -25,6 +28,7 @@ public class GameStateBean {
 
     public GameStateBean() {
         propChange = new PropertyChangeSupport(this);
+        setUpNewGame();
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -60,8 +64,8 @@ public class GameStateBean {
 
     }
 
-    public void makeMove(int[] nextMoves) {
-        makeMove(nextMoves[0], nextMoves[1]);
+    public void makeMove(Point nextMove) {
+        makeMove(nextMove.x, nextMove.y);
 
     }
 
@@ -120,7 +124,7 @@ public class GameStateBean {
     public int checkVerWinner() {
         int sum = 0;
         for (int x = 0; x < board.length; x++) {
-            sum = (Math.abs(sum) >= 3 ? sum : 0);
+//            sum = (Math.abs(sum) >= 3 ? sum : 0);
 
             for (int y = 0; y < board[x].length; y++) {
                 sum += board[y][x];

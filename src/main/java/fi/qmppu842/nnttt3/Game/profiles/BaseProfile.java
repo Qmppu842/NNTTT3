@@ -1,6 +1,7 @@
 package fi.qmppu842.nnttt3.Game.profiles;
 
 import fi.qmppu842.nnttt3.Game.GameStateBean;
+import java.awt.Point;
 import lombok.Setter;
 
 /**
@@ -46,11 +47,11 @@ public abstract class BaseProfile {
      *
      * @return Array that contains nextX and nextY
      */
-    public int[] getNextTurn() {
+    public Point getNextTurn() {
         if (!isNextTurnReady) {
             generateNextTurn();
         }
-        return new int[]{nextX, nextY};
+        return new Point(nextX, nextY);
     }
 
 //    /**
