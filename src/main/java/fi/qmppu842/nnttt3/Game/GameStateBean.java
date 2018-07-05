@@ -60,6 +60,11 @@ public class GameStateBean {
 
     }
 
+    public void makeMove(int[] nextMoves) {
+        makeMove(nextMoves[0], nextMoves[1]);
+
+    }
+
     public final int getXSize() {
         return board.length;
     }

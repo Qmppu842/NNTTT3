@@ -162,6 +162,21 @@ public class GameStateBeanTest {
         assertTrue(gameState.checkDiagWinner() == -3);
     }
 
+    @Test
+    public void nextCorrectValueTest() {
+        makeOneMove(0, 0);
+        int next = gameState.getNext();
+        assertTrue(next == -1);
+        makeOneMove(0, 0);
+        next = gameState.getNext();
+        assertTrue(next == -1);
+        makeOneMove(0, 1);
+        next = gameState.getNext();
+        assertTrue(next == 1);
+        assertTrue(gameState.getTurnCounter() == 2);
+        
+    }
+
     private void makeOneMove(int y, int x) {
         gameState.makeMove(y, x);
     }
