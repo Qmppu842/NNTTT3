@@ -117,17 +117,13 @@ public class GameStateBeanTest {
 
     @Test
     public void boardSumTest() {
-//        assertTrue(gameState.getBoardSum() == 0);
         assertEquals(gameState.getBoardSum(), 0);
         makeOneMove(0, 0);
-//        assertTrue(gameState.getBoardSum() == 1);
         assertEquals(gameState.getBoardSum(), 1);
         makeOneMove(0, 1);
-//        assertTrue(gameState.getBoardSum() == 0);
         assertEquals(gameState.getBoardSum(), 0);
         gameState.setUpNewGame();
         fillTie();
-//        assertTrue(gameState.getBoardSum() == 1);
         assertEquals(gameState.getBoardSum(), 1);
 
     }
@@ -136,26 +132,20 @@ public class GameStateBeanTest {
     public void horizontalWinTest() {
 //        TODO: Reflection API seems dang cool.
         gameState.setBoard(new int[][]{{1, 1, 1}, {0, 0, 0}, {0, 0, 0}});
-//        assertTrue(gameState.checkHorWinner() == 3);
         assertEquals(gameState.checkHorWinner(), 3);
         gameState.setBoard(new int[][]{{0, 0, 0}, {1, 1, 1}, {0, 0, 0}});
-//        assertTrue(gameState.checkHorWinner() == 3);
         assertEquals(gameState.checkHorWinner(), 3);
         gameState.setBoard(new int[][]{{0, 0, 0}, {0, 0, 0}, {1, 1, 1}});
-//        assertTrue(gameState.checkHorWinner() == 3);
         assertEquals(gameState.checkHorWinner(), 3);
     }
 
     @Test
     public void verticalWinTest() {
         gameState.setBoard(new int[][]{{1, 0, 0}, {1, 0, 0}, {1, 0, 0}});
-//        assertTrue(gameState.checkVerWinner() == 3);        
         assertEquals(gameState.checkVerWinner(), 3);
         gameState.setBoard(new int[][]{{0, 1, 0}, {0, 1, 0}, {0, 1, 0}});
-//        assertTrue(gameState.checkVerWinner() == 3); 
         assertEquals(gameState.checkVerWinner(), 3);
         gameState.setBoard(new int[][]{{0, 0, 1}, {0, 0, 1}, {0, 0, 1}});
-//        assertTrue(gameState.checkVerWinner() == 3); 
         assertEquals(gameState.checkVerWinner(), 3);
 
     }
@@ -163,16 +153,12 @@ public class GameStateBeanTest {
     @Test
     public void diagonalWinTest() {
         gameState.setBoard(new int[][]{{1, 0, 0}, {0, 1, 0}, {0, 0, 1}});
-//        assertTrue(gameState.checkDiagWinner() == 3); 
         assertEquals(gameState.checkDiagWinner(), 3);
         gameState.setBoard(new int[][]{{0, 0, 1}, {0, 1, 0}, {1, 0, 0}});
-//        assertTrue(gameState.checkDiagWinner() == 3);
         assertEquals(gameState.checkDiagWinner(), 3);
         gameState.setBoard(new int[][]{{-1, 0, 0}, {0, -1, 0}, {0, 0, -1}});
-//        assertTrue(gameState.checkDiagWinner() == -3);
         assertEquals(gameState.checkDiagWinner(), -3);
         gameState.setBoard(new int[][]{{0, 0, -1}, {0, -1, 0}, {-1, 0, 0}});
-//        assertTrue(gameState.checkDiagWinner() == -3);
         assertEquals(gameState.checkDiagWinner(), -3);
 
     }
@@ -181,20 +167,15 @@ public class GameStateBeanTest {
     public void nextCorrectValueTest() {
         makeOneMove(0, 0);
         int next = gameState.getNext();
-//        assertTrue(next == -1);
         assertEquals(next, -1);
 
         makeOneMove(0, 0);
         next = gameState.getNext();
-//        assertTrue(next == -1);
         assertEquals(next, -1);
 
         makeOneMove(0, 1);
         next = gameState.getNext();
-//        assertTrue(next == 1);
         assertEquals(next, 1);
-
-//        assertTrue(gameState.getTurnCounter() == 2);
         assertEquals(gameState.getTurnCounter(), 2);
 
     }
