@@ -47,7 +47,7 @@ public class GameStateBean {
     }
 
     public void setUpNewGameCustom() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Not yet supported.");
     }
 
     public void makeMove(int y, int x) {
@@ -55,12 +55,15 @@ public class GameStateBean {
             return;
         }
         int oldBoard = board[y][x];
+        int oldGameState = winner;
         if (oldBoard == 0) {
             board[y][x] = next;
             next *= -1;
             turnCounter++;
+            checkAllWinners();
         }
         propChange.firePropertyChange("makeMove", oldBoard, board[y][x]);
+        propChange.firePropertyChange("winner", oldGameState, winner);
 
     }
 

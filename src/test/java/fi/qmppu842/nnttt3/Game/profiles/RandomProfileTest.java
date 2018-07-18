@@ -41,9 +41,8 @@ public class RandomProfileTest {
         gameState.makeMove(nextMove);
         int boardSum = gameState.getBoardSum();
         assertEquals(boardSum, 1);
-        System.out.println("moiiii");
         int winner = gameState.checkAllWinners();
-        assertEquals(winner, 8);
+        assertEquals(winner, 0);
 
     }
 

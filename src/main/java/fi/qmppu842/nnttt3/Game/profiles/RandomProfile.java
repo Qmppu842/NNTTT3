@@ -19,6 +19,13 @@ public class RandomProfile extends BaseProfile {
 //        possiblities = new ArrayList<>();
     }
 
+    public RandomProfile(GameStateBean gameState) {
+        super(gameState);
+         rand = new Random();
+    }
+    
+    
+
     private void generateNewpossiblities() {
         possiblities = new ArrayList<>();
         int[][] board = gameState.getBoard();

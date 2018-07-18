@@ -2,6 +2,7 @@ package fi.qmppu842.nnttt3.Game.profiles;
 
 import fi.qmppu842.nnttt3.Game.GameStateBean;
 import java.awt.Point;
+import lombok.Getter;
 import lombok.Setter;
 
 /**
@@ -18,6 +19,9 @@ public abstract class BaseProfile {
     protected boolean isNextTurnReady;
     @Setter
     protected GameStateBean gameState;
+    @Getter
+    @Setter
+    protected boolean isHumanProfile;
 
     public BaseProfile() {
         nextX = -1;
