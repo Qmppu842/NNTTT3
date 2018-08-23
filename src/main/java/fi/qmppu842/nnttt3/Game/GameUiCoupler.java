@@ -8,6 +8,7 @@ import fi.qmppu842.nnttt3.Game.profiles.PerfectStrategyProfile;
 import fi.qmppu842.nnttt3.Game.profiles.RandomProfile;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Arrays;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +18,9 @@ import lombok.Setter;
  */
 public class GameUiCoupler {
 
+//    @Setter
     private BaseProfile player1;
+//    @Setter
     private BaseProfile player2;
     @Getter
     private ArrayList<BaseProfile> profiles;
@@ -28,18 +31,17 @@ public class GameUiCoupler {
         gameState = new GameStateBean();
         profiles = new ArrayList<>();
         profiles.add(new RandomProfile(gameState));
-        profiles.add(new HumanProfile(gameState));
-        profiles.add(new PerfectStrategyProfile(gameState));
-        profiles.add(new AI_GodClass(gameState));
-        profiles.add(new HatStyleProfile(gameState));
+//        profiles.add(new HumanProfile(gameState));
+//        profiles.add(new PerfectStrategyProfile(gameState));
+//        profiles.add(new AI_GodClass(gameState));
+//        profiles.add(new HatStyleProfile(gameState));
+//
+//        profiles.add(new AI_GodClass(gameState, 100));
+//        profiles.add(new HatStyleProfile(gameState, 100));
+//        profiles.add(new AI_GodClass(gameState, 1000));
+//        profiles.add(new HatStyleProfile(gameState, 1000));
 
-        profiles.add(new AI_GodClass(gameState, 100));
-        profiles.add(new HatStyleProfile(gameState, 100));
-        profiles.add(new AI_GodClass(gameState, 1000));
-        profiles.add(new HatStyleProfile(gameState, 1000));
-
-        profiles.get(1).setHumanProfile(true);
-
+//        profiles.get(1).setHumanProfile(true);
     }
 
     public void addMoreAiLevels() {
@@ -86,6 +88,7 @@ public class GameUiCoupler {
 //    TODO: hmm... I think this can be easyly done.
 //    one needs to not worry about what profile generates.
 //    just put what gets here to game board        
+
     public void humanTurn(int x, int y) {
         int nextTurner = gameState.getNext();
         if (nextTurner == 1 && player1.isHumanProfile()) {
@@ -108,11 +111,64 @@ public class GameUiCoupler {
 
     public int[][] setUpNewGame() {
         gameState.setUpNewGame();
+        if (player1 != null) {
+            player1.setGameState(gameState);
+        }
+        if (player2 != null) {
+            player2.setGameState(gameState);
+        }
         return gameState.getBoard();
     }
 
+    /**
+     * TODO: delombok things to get proper javadoc <br>
+     * Currently -1 means O wins, 0 draw, 1 X wins and 8 game is still going
+     *
+     * @return
+     */
     public int getWinner() {
         return gameState.getWinner();
+    }
+
+    /**
+     * Returns true if turn was made.
+     *
+     * @return
+     */
+    public boolean makeNextNonHumanTurn() {
+
+        int nextTurner = gameState.getNext();
+        BaseProfile nexte;
+        if (nextTurner == 1 && player1.isHumanProfile()) {
+            return false;
+        } else if (nextTurner == -1 && player2.isHumanProfile()) {
+            return false;
+        }
+        if (nextTurner == 1) {
+            nexte = player1;
+        } else {
+            nexte = player2;
+        }
+//        if (nexte.) {
+//            
+//        }
+        Point nextTurn = nexte.getNextTurn();
+        gameState.makeMove(nextTurn);
+        return true;
+    }
+
+    public void noHumans() {
+        while (true) {
+            System.out.println("Current game state: ");
+            System.out.println(Arrays.deepToString(gameState.getBoard()));
+            makeNextNonHumanTurn();
+            if (gameState.checkAllWinners() == 8
+                    || gameState.checkAllWinners() == -3
+                    || gameState.checkAllWinners() == 3) {
+                break;
+            }
+        }
+
     }
 
 }

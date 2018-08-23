@@ -1,7 +1,10 @@
 package fi.qmppu842.nnttt3.Game;
 
+import fi.qmppu842.nnttt3.Game.profiles.RandomProfile;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 /**
  *
@@ -27,4 +30,13 @@ public class GameUiCouplerTest {
 //
 //    }
 
+    @Test
+    public void nonHumanTurnTest(){
+        coupler.selectPlayer1(0);
+        coupler.selectPlayer2(0);
+//        coupler.setPlayer1(new RandomProfile);
+        coupler.setUpNewGame();
+        coupler.noHumans();
+        assertTrue(coupler.getWinner() != 8);
+    }
 }

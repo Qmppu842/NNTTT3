@@ -55,6 +55,7 @@ public abstract class BaseProfile {
         if (!isNextTurnReady) {
             generateNextTurn();
         }
+        isNextTurnReady = false;
         return new Point(nextX, nextY);
     }
 
